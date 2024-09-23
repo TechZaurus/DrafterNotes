@@ -1,0 +1,32 @@
+
+
+.noteContainer {
+    display: inline-flex;
+}
+
+
+.mainSection {
+    max-width: 50%;
+    padding-right: 5vw;
+    left: 50%;
+    margin-top: 5%;
+}
+
+.imageSection {
+    width: 50vw;
+    min-height: 60svh;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    margin-top: 5%;
+}
+
+
+.titleField {
+    width: 30vw;
+}
+
+
+.noteField {
+    width: 30vw;
+}
