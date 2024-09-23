@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Providers from "./Providers";
+import { manrope } from "./utils/fonts";
 
 
 export const metadata: Metadata = {
@@ -15,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body>
+      <body className={manrope}>
         <Providers>
           {children}
         </Providers>

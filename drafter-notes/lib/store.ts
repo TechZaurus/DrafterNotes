@@ -3,6 +3,7 @@ import notesReducer from "./features/notes/notesSlice"
 import categoriesReducer from "./features/notes/categoriesSlice"
 import { useDispatch } from "react-redux";
 
+
 export const store = configureStore({
   reducer: { 
     notes: notesReducer,

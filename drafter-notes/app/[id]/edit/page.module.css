@@ -1,32 +1,91 @@
-
-
 .noteContainer {
-    display: inline-flex;
+  display: inline-flex;
 }
 
-
 .mainSection {
-    max-width: 50%;
-    padding-right: 5vw;
-    left: 50%;
-    margin-top: 5%;
+  max-width: 50%;
+  padding-right: 5vw;
+  left: 50%;
+  margin-top: 5%;
 }
 
 .imageSection {
-    width: 50vw;
-    min-height: 60svh;
-    display: flex;
-    align-items: center;
-    justify-items: center;
-    margin-top: 5%;
+  width: 50vw;
+  min-height: 60svh;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  margin-top: 5%;
+  padding-left: 2%;
 }
-
 
 .titleField {
-    width: 30vw;
+  width: 30vw;
+  background-color: #141414;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 20px;
 }
 
-
 .noteField {
-    width: 30vw;
+  width: 30vw;
+  background-color: #141414;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 20px;
+}
+
+.label {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.select {
+    background-color: #141414;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+
+  .button {
+    background-color: #f3682d;
+    border: solid 1px #ffffff; 
+    border-radius: 20px;
+    padding: 0.5rem;
+    color: #ffffff;
+  }
+
+@media screen and (max-width: 1023px) {
+  .imageSection {
+    display: none;
+  }
+
+  .mainSection {
+    max-width: 100%;
+    padding-right: 5vw;
+    left: 50%;
+    margin-top: 5%;
+  }
+
+  .noteContainer {
+    display: flex;
+  }
+
+  .titleField {
+    width: 70vw;
+    background-color: #141414;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 20px;
+  }
+
+  .noteField {
+    width: 70vw;
+    background-color: #141414;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 20px;
+  }
 }

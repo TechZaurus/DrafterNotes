@@ -17,7 +17,7 @@ const GridLayout: React.FC<Props> = ({ children }) => {
   return (
     <div className="row">
       {childrenMap.map((element, index) => {
-        return <div key={index} className="col">
+        return <div key={index} className="col" style={{display: "flex", justifyContent: "center"}}>
           {element}
         </div>
     })}

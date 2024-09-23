@@ -1,4 +1,5 @@
 import { PropsWithChildren } from "react";
+import styles from "./Header.module.css";
 
 
 interface Props extends PropsWithChildren {
@@ -7,7 +8,7 @@ interface Props extends PropsWithChildren {
 
 
 const Header: React.FC<Props> = ({children}) => {
-    return <div>{children}</div>
+    return <div className={styles.header}>{children}</div>
 }
 
 

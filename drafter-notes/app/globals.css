@@ -1,6 +1,7 @@
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #141414;
+  --accent: #f3682d;
 }
 
 html,
@@ -29,17 +30,10 @@ a {
 }
 
 .page {
-  --gray-rgb: 0, 0, 0;
-  --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
-  --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-
-  /* display: grid;
-  grid-template-rows: 20px 1fr 20px;
-  align-items: center;
-  justify-items: center; */
   min-height: 100svh;
   padding: 5vw;
+  color: white;
+  background-color: #141414;
 }
+
+

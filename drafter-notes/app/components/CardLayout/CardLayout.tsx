@@ -2,6 +2,7 @@ import { PropsWithChildren, ReactNode } from "react";
 import styles from "./CardLayout.module.css";
 import classNames from "classnames";
 import TagsLayout from "../TagsLayout/TagsLayout";
+import { Pencil } from "lucide-react";
 
 interface CardInfo {
   title: string;
@@ -14,6 +15,7 @@ interface Props extends PropsWithChildren {
   cardInfo: CardInfo;
   onClickCard?: () => void;
   onClickEdit?: () => void;
+  style?: React.CSSProperties;
 }
 
 const CardLayout: React.FC<Props> = ({onClickCard, onClickEdit, cardInfo}) => {
@@ -23,25 +25,19 @@ const CardLayout: React.FC<Props> = ({onClickCard, onClickEdit, cardInfo}) => {
         onClickCard();
       }
     }} className={classNames("card", styles.cardLayout)}>
-      <h5 className="card-title">Card title</h5>
-      <p className="card-text">
-        Some quick example text to build on the card title and make up the bulk
-        of the cards content.
+      <h5 className={styles.cardTitle}>{cardInfo.title}</h5>
+      <p className={styles.cardDescription}>
+        {cardInfo.description}
       </p>
       <TagsLayout>
-        <button>Кнопка</button>
-        <button>Кнопка</button>
-        <button>Кнопка</button>
-        <button>Кнопка</button>
-        <button>Кнопка</button>
-        <button>Кнопка</button>
+        {cardInfo.category != "" && <div className={styles.category}>{cardInfo.category}</div>}
       </TagsLayout>
-      <button onClick={(event) => {
+      <button className={styles.editIcon} onClick={(event) => {
         if (onClickEdit !== undefined) {
           event.stopPropagation();
           onClickEdit();
         }
-      }} style={{position: "absolute", left: "90%", marginTop: "0.1rem", zIndex: "2"}}>RR</button>
+      }}><Pencil/></button>
     </div>
   );
 };

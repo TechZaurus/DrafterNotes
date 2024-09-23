@@ -1,51 +1,63 @@
-'use client'
+"use client";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./page.module.css";
 import TagsLayout from "../components/TagsLayout/TagsLayout";
 import classNames from "classnames";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import { IRootState, useAppDispatch } from "@/lib/store";
+import { useSelector } from "react-redux";
+import { setCurrentNote } from "@/lib/features/notes/notesSlice";
+import { useEffect } from "react";
+import { Pencil } from "lucide-react";
 
 const Page = () => {
   const router = useRouter();
   const pathname = usePathname();
 
+  const note = useSelector((state: IRootState) => state.notes.currentNote);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setCurrentNote(Number(pathname.slice(1)) - 1));
+  }, []);
+
   const onClickEdit = () => {
     router.push(pathname + "/edit");
-  }
+    console.log("onclick");
+  };
 
   return (
     <>
       <main className={classNames("page", styles.noteContainer)}>
         <div className={styles.mainSection}>
           <div className={styles.heading}>
-            <h5>Название заметки</h5>
-            <button onClick={() => onClickEdit()}>RR</button>
+            <h5 className={styles.title}>{note?.title}</h5>
+            <button
+              className={styles.editIcon}
+              onClick={(event) => onClickEdit()}
+            >
+              <Pencil />
+            </button>
           </div>
-          <br />
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+          <p><i>{note?.dateCreated.toLocaleDateString()}</i></p>
+          <br/>
+          <p className={styles.description}>
+            {note?.description}
           </p>
           <div className={styles.categories}>
-          <TagsLayout >
-            <button>Кнопка</button>
-            <button>Кнопка</button>
-            <button>Кнопка</button>
-          </TagsLayout>
+            <TagsLayout>
+              {note?.category !== "" && <div className={styles.category}>{note?.category}</div>}
+            </TagsLayout>
           </div>
         </div>
         <div className={styles.imageSection}>
           <Image
             width={500}
             height={500}
-            src="https://img.freepik.com/premium-vector/test-time-concept-clipboard-with-dough-form-pencil-stopwatch-vector-filling-writing-tests_153097-6256.jpg"
-            alt="test"
+            src="/note_edit.svg"
+            alt="image"
           />
         </div>
       </main>

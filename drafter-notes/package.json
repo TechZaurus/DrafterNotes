@@ -10,8 +10,11 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
+    "@types/redux-persist": "^4.3.1",
+    "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "classnames": "^2.5.1",
+    "lucide-react": "^0.445.0",
     "msw": "^2.4.9",
     "next": "14.2.13",
     "react": "^18",
@@ -27,5 +30,10 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.13"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

@@ -20,8 +20,8 @@ export const categoriesSlice = createSlice({
   name: "categories", 
   initialState,
   reducers: {
-    setCategories(state, action: PayloadAction<Categories>) {
-        state.categories = action.payload.categories;
+    setCategories(state, action: PayloadAction<void>) {
+        state.categories = ["Категория 1", "Категория 2", "Категория 3"];
     }
   } 
 })
