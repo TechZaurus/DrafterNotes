@@ -7,7 +7,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { IRootState, useAppDispatch } from "@/lib/store";
 import { useSelector } from "react-redux";
-import { setCurrentNote } from "@/lib/features/notes/notesSlice";
+import { getNote, Note, setCurrentNote } from "@/lib/features/notes/notesSlice";
 import { useEffect } from "react";
 import { Pencil } from "lucide-react";
 
@@ -20,12 +20,11 @@ const Page = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(setCurrentNote(Number(pathname.slice(1)) - 1));
-  }, []);
+    getNote(Number(pathname.slice(1)), (note: Note) => {dispatch(setCurrentNote(note));}, () => {dispatch(setCurrentNote(undefined))})
+  }, [pathname, dispatch]);
 
   const onClickEdit = () => {
     router.push(pathname + "/edit");
-    console.log("onclick");
   };
 
   return (
@@ -36,12 +35,12 @@ const Page = () => {
             <h5 className={styles.title}>{note?.title}</h5>
             <button
               className={styles.editIcon}
-              onClick={(event) => onClickEdit()}
+              onClick={() => onClickEdit()}
             >
               <Pencil />
             </button>
           </div>
-          <p><i>{note?.dateCreated.toLocaleDateString()}</i></p>
+          <p><i suppressHydrationWarning={true}>{new Date(note === undefined? 0 : note.dateCreated).toLocaleDateString()}</i></p>
           <br/>
           <p className={styles.description}>
             {note?.description}

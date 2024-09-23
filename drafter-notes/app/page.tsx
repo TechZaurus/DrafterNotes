@@ -10,6 +10,7 @@ import { IRootState, useAppDispatch } from "@/lib/store";
 import ReduxProvider from "@/app/ReduxProvider";
 import { useEffect } from "react";
 import {
+  getNotes,
   Note,
   setFilterApplied,
   setFilteredNotes,
@@ -17,7 +18,6 @@ import {
 } from "../lib/features/notes/notesSlice";
 import { setCategories } from "@/lib/features/notes/categoriesSlice";
 import { useRouter, useSearchParams } from "next/navigation";
-
 
 export default function Home() {
   const notes = useSelector(
@@ -33,10 +33,12 @@ export default function Home() {
     (state: IRootState) => state.notes.filtersAppliedState
   );
 
+  console.log(notes);
+
   const onSelectSort = (sortOrder: string) => {
     const category = params.get("category");
     router.push(
-       `/?sortBy=${sortOrder}&category=${category == null ? "" : category}`
+      `/?sortBy=${sortOrder}&category=${category == null ? "" : category}`
     );
     dispatch(
       setFilterApplied(
@@ -45,7 +47,6 @@ export default function Home() {
     );
   };
 
-  
   const onClickCategory = (index: number, category: string) => {
     const categoryParam = params.get("category");
     if (category === categoryParam) {
@@ -54,55 +55,41 @@ export default function Home() {
     const sortBy = params.get("sortBy");
     router.push(
       `/?sortBy=${sortBy === null ? "" : sortBy}&category=${category}`
-   );
-   dispatch(
-    setFilterApplied(
-      category != "" || (sortBy != null && sortBy.length > 0)
-    )
-  );
+    );
+    dispatch(
+      setFilterApplied(category != "" || (sortBy != null && sortBy.length > 0))
+    );
   };
 
   const dispatch = useAppDispatch();
   const router = useRouter();
   const params = useSearchParams();
 
-  const getAllNotes = () => {
-    dispatch(
-      setNotes()
-    );
-  };
-
-  const getFilteredNotes = () => {
-    const paramCategory = params.get("category");
-    const paramSortBy = params.get("sortBy");
-    const category = paramCategory === null ? "" : paramCategory;
-    const sortBy = paramSortBy === null ? "" : paramSortBy;
-    dispatch(setFilteredNotes({ category, sortBy }));
-  };
+  useEffect(() => {
+    //setTimeout(() => {
+    const sortOption = params.get("sortBy");
+    const categoryOption = params.get("category");
+    if (
+      (sortOption != null && sortOption.length > 0) ||
+      (categoryOption != null && categoryOption.length > 0)
+    ) {
+      dispatch(setFilterApplied(true));
+      const paramCategory = params.get("category");
+      const paramSortBy = params.get("sortBy");
+      const category = paramCategory === null ? "" : paramCategory;
+      const sortBy = paramSortBy === null ? "" : paramSortBy;
+      dispatch(setFilteredNotes({ category, sortBy }));
+    } else {
+      getNotes((notes) => dispatch(setNotes({notes})))
+    }
+    //}, 500);
+  }, [params, dispatch]);
 
   useEffect(() => {
     setTimeout(() => {
-      const sortOption = params.get("sortBy");
-      const categoryOption = params.get("category");
-      if (
-        (sortOption != null && sortOption.length > 0) ||
-        (categoryOption != null && categoryOption.length > 0)
-      ) {
-        dispatch(setFilterApplied(true));
-        getFilteredNotes();
-      } else {
-        getAllNotes();
-      }
+      dispatch(setCategories());
     }, 500);
-  }, [params]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      dispatch(
-        setCategories()
-      );
-    }, 500);
-  }, []);
+  }, [dispatch]);
 
   const onClickAdd = () => {
     router.push(`/${notes.length + 1}/edit?new`);
@@ -128,7 +115,9 @@ export default function Home() {
               <option value={""}>По дате: сначала новые</option>
               <option value={"old"}>По дате: сначала старые</option>
             </select>
-            <button className={styles.addButton} onClick={() => onClickAdd()}>+ Добавить</button>
+            <button className={styles.addButton} onClick={() => onClickAdd()}>
+              + Добавить
+            </button>
             {categories.map((category, index) => (
               <button
                 className={

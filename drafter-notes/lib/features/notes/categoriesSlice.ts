@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit"
 
 
 export interface CategoriesState {
@@ -20,7 +20,7 @@ export const categoriesSlice = createSlice({
   name: "categories", 
   initialState,
   reducers: {
-    setCategories(state, action: PayloadAction<void>) {
+    setCategories(state) {
         state.categories = ["Категория 1", "Категория 2", "Категория 3"];
     }
   } 

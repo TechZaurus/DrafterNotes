@@ -7,6 +7,11 @@ const nextConfig = {
             hostname: 'img.freepik.com',
             port: '',
           },
+          {
+            protocol: 'http',
+            hostname: 'localhost',
+            port: '8000',
+          },
         ],
       },
 };
