@@ -1,6 +1,7 @@
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #141414;
+  --accent: #f3682d;
 }
 
 html,
@@ -27,3 +28,12 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.page {
+  min-height: 100svh;
+  padding: 5vw;
+  color: white;
+  background-color: #141414;
+}
+
+

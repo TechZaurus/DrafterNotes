@@ -1,0 +1,44 @@
+
+
+
+.cardLayout {
+    min-width: 320px !important;
+    max-width: 420px;
+    margin: 0.75rem 0.2rem;
+    padding: 1.6rem;
+    border-radius: 20px !important;
+    color: #141414;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.cardTitle {
+    font-weight: 600;
+}
+
+.cardDescription {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+
+.category {
+    background-color: #f3682d;
+    border: solid 1px #ffffff; 
+    border-radius: 20px;
+    padding: 0.5rem;
+    color: #ffffff;
+    width: fit-content;
+  }
+
+
+  .editIcon {
+    position: absolute;
+    left: 85%;
+    margin-top: -0.15rem;
+    margin-left: 0.05rem;
+    z-index: 2;
+    background-color: transparent;
+    border-color: transparent;
+  }
